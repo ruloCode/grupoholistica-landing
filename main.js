@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCounterAnimations();
   initSmoothScroll();
   initTestimonialDots();
+  initHorizontalScrollIndicators();
 
   // Premium features
   initParticleSystem();
@@ -44,28 +45,50 @@ function initNavigation() {
 
   // Mobile menu toggle
   if (navToggle && navMenu) {
-    navToggle.addEventListener('click', () => {
+    const toggleMenu = (forceClose = false) => {
       const isOpen = navMenu.classList.contains('active');
-      navMenu.classList.toggle('active');
-      navToggle.classList.toggle('active');
-      navToggle.setAttribute('aria-expanded', !isOpen);
+      const shouldClose = forceClose || isOpen;
+      
+      if (shouldClose) {
+        navMenu.classList.remove('active');
+        navToggle.classList.remove('active');
+        navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      } else {
+        navMenu.classList.add('active');
+        navToggle.classList.add('active');
+        navToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMenu();
     });
 
     // Close menu when clicking on a link
     navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
-      });
+      link.addEventListener('click', () => toggleMenu(true));
+    });
+
+    // Close menu when clicking the CTA button
+    const navCta = navMenu.querySelector('.nav-cta');
+    if (navCta) {
+      navCta.addEventListener('click', () => toggleMenu(true));
+    }
+
+    // Close menu when pressing Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('active')) {
+        toggleMenu(true);
+      }
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!nav.contains(e.target) && navMenu.classList.contains('active')) {
-        navMenu.classList.remove('active');
-        navToggle.classList.remove('active');
-        navToggle.setAttribute('aria-expanded', 'false');
+        toggleMenu(true);
       }
     });
   }
@@ -190,42 +213,105 @@ function initSmoothScroll() {
 }
 
 /**
- * Testimonial dots navigation
+ * Testimonial dots navigation with horizontal scroll support
  */
 function initTestimonialDots() {
   const dots = document.querySelectorAll('.testimonials__dot');
   const cards = document.querySelectorAll('.testimonial-card');
+  const grid = document.querySelector('.testimonials__grid');
 
+  if (!dots.length || !cards.length || !grid) return;
+
+  // Click on dots to scroll to card
   dots.forEach((dot, index) => {
     dot.addEventListener('click', () => {
       // Update active dot
       dots.forEach(d => d.classList.remove('testimonials__dot--active'));
       dot.classList.add('testimonials__dot--active');
 
-      // On mobile, scroll to the corresponding card
-      if (window.innerWidth <= 768) {
-        cards[index]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
+      // Scroll to the corresponding card
+      const card = cards[index];
+      if (card && window.innerWidth <= 768) {
+        // For horizontal scroll container
+        const cardLeft = card.offsetLeft;
+        const gridPadding = 20; // padding-left of the grid
+        const scrollPosition = cardLeft - gridPadding - (grid.offsetWidth / 2) + (card.offsetWidth / 2);
+        
+        grid.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
         });
       }
     });
   });
 
-  // Update active dot based on scroll position (mobile only)
-  if (window.innerWidth <= 768) {
-    const scrollObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const index = Array.from(cards).indexOf(entry.target);
+  // Update active dot based on horizontal scroll position
+  let scrollTimeout;
+  grid.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const scrollLeft = grid.scrollLeft;
+      const gridWidth = grid.offsetWidth;
+      
+      cards.forEach((card, index) => {
+        const cardLeft = card.offsetLeft - 20; // Account for padding
+        const cardWidth = card.offsetWidth;
+        const cardCenter = cardLeft + (cardWidth / 2);
+        const viewCenter = scrollLeft + (gridWidth / 2);
+        
+        // Check if card center is near view center
+        if (Math.abs(cardCenter - viewCenter) < cardWidth / 2) {
           dots.forEach(d => d.classList.remove('testimonials__dot--active'));
           dots[index]?.classList.add('testimonials__dot--active');
         }
       });
-    }, { threshold: 0.5 });
+    }, 50);
+  }, { passive: true });
 
-    cards.forEach(card => scrollObserver.observe(card));
-  }
+  // Also use Intersection Observer as backup
+  const scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
+        const index = Array.from(cards).indexOf(entry.target);
+        dots.forEach(d => d.classList.remove('testimonials__dot--active'));
+        dots[index]?.classList.add('testimonials__dot--active');
+      }
+    });
+  }, { 
+    root: grid,
+    threshold: 0.5 
+  });
+
+  cards.forEach(card => scrollObserver.observe(card));
+}
+
+/**
+ * Initialize horizontal scroll indicators for mobile
+ */
+function initHorizontalScrollIndicators() {
+  if (window.innerWidth > 768) return;
+  
+  const scrollContainers = document.querySelectorAll('.services__grid, .testimonials__grid');
+  
+  scrollContainers.forEach(container => {
+    // Add scroll hint animation on first view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Subtle scroll hint
+          setTimeout(() => {
+            container.scrollTo({ left: 40, behavior: 'smooth' });
+            setTimeout(() => {
+              container.scrollTo({ left: 0, behavior: 'smooth' });
+            }, 300);
+          }, 500);
+          observer.unobserve(container);
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    observer.observe(container);
+  });
 }
 
 /**
