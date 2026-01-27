@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Grupo Holística - Pioneros en Reputación Corporativa en Colombia. Más de 15 años protegiendo y potenciando la imagen de empresas líderes.">
+  <meta name="keywords" content="reputación corporativa, comunicación estratégica, gestión de crisis, Colombia">
+  <title>Grupo Holística - Pioneros en Reputación Corporativa en Colombia</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Hero Section - Futuristic Dark Mode -->
+  <section class="hero" id="inicio">
+    <!-- Animated Background -->
+    <div class="hero__background">
+      <!-- Perspective Grid -->
+      <div class="hero__grid"></div>
+      <!-- Aurora Effect -->
+      <div class="hero__aurora"></div>
+      <!-- Gradient Orbs -->
+      <div class="hero__gradient-orb hero__gradient-orb--1"></div>
+      <div class="hero__gradient-orb hero__gradient-orb--2"></div>
+      <div class="hero__gradient-orb hero__gradient-orb--3"></div>
+    </div>
+
+    <!-- Canvas Particle System -->
+    <canvas class="hero__canvas" id="particleCanvas"></canvas>
+
+    <!-- Fallback Particle System -->
+    <div class="hero__particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+      <div class="nav-container">
+        <a href="#inicio" class="nav-logo">
+          <img src="assets/images/Logo-Grupo-Holistica.png" alt="Grupo Holística" width="150" height="44">
+        </a>
+        <div class="nav-menu" id="nav-menu">
+          <a href="#servicios" class="nav-link">Servicios</a>
+          <a href="#nosotros" class="nav-link">Nosotros</a>
+          <a href="#testimonios" class="nav-link">Casos de Éxito</a>
+          <a href="#contacto" class="nav-cta">Agendar consulta</a>
+        </div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content Wrapper -->
+    <div class="hero__wrapper">
+
+      <!-- Hero Content - Centered -->
+      <div class="hero-content">
+        <h1 class="hero-title animate-fade-up">
+          <span class="title-line">Protegemos lo que</span>
+          <span class="title-accent">construyes</span>
+        </h1>
+        
+        <p class="hero-tagline animate-fade-up delay-1">
+          +15 años blindando la reputación de las empresas más importantes de Colombia
+        </p>
+        
+        <a href="#contacto" class="btn btn-primary btn-hero animate-fade-up delay-2">
+          <span>Agenda tu consulta</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div class="hero-scroll">
+        <a href="#servicios" class="scroll-indicator" aria-label="Scroll hacia abajo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Stats Bar - Bottom -->
+      <div class="hero-stats-bar animate-fade-up delay-3">
+        <div class="stat-item">
+          <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Empresas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="15">0</span><span class="stat-suffix">+</span>
+          <span class="stat-label">Años</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="7">0</span>
+          <span class="stat-label">Servicios</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services" id="servicios">
+    <div class="services__container">
+      <div class="services__header fade-up">
+        <h2 class="services__title">Nuestras Líneas de Servicio</h2>
+        <p class="services__subtitle">Soluciones integrales para la gestión de tu reputación corporativa</p>
+      </div>
+
+      <div class="services__grid">
+        <!-- Row 1: 4 cards -->
+        <div class="service-card fade-up" data-color="#2ea3f2">
+          <div class="service-card__logo">
+            <img src="assets/images/reco.png" alt="RECO" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">RECO</h3>
+          <p class="service-card__description">Reputación Estratégica Corporativa</p>
+        </div>
+
+        <div class="service-card fade-up" data-color="#E89830">
+          <div class="service-card__logo">
+            <img src="assets/images/sigerco.png" alt="SIGERCO" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">SIGERCO</h3>
+          <p class="service-card__description">Sistema de Gestión de Riesgos y Crisis</p>
+        </div>
+
+        <div class="service-card fade-up" data-color="#29c4a9">
+          <div class="service-card__logo">
+            <img src="assets/images/celforc.png" alt="CELFORC" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">CELFORC</h3>
+          <p class="service-card__description">Centro Latinoamericano de Formación en Reputación Corporativa</p>
+        </div>
+
+        <div class="service-card fade-up" data-color="#8B5CF6">
+          <div class="service-card__logo">
+            <img src="assets/images/ces.png" alt="CES" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">CES</h3>
+          <p class="service-card__description">Comunicación Estratégica Sostenible</p>
+        </div>
+
+        <!-- Row 2: 3 cards -->
+        <div class="service-card fade-up" data-color="#3B82F6">
+          <div class="service-card__logo">
+            <img src="assets/images/entorno.png" alt="ENTORNO" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">ENTORNO</h3>
+          <p class="service-card__description">Gestión con Grupos de Interés</p>
+        </div>
+
+        <div class="service-card fade-up" data-color="#D97706">
+          <div class="service-card__logo">
+            <img src="assets/images/copem.png" alt="COPEM" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">COPEM</h3>
+          <p class="service-card__description">Consultoría para Petróleo, Minería e Infraestructura</p>
+        </div>
+
+        <div class="service-card fade-up" data-color="#EC4899">
+          <div class="service-card__logo">
+            <img src="assets/images/SISO-home.png" alt="SISO" class="service-card__logo-img">
+          </div>
+          <h3 class="service-card__title">SISO</h3>
+          <p class="service-card__description">Innovación para la Sinergia Social</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us Section -->
+  <section class="why-us" id="nosotros">
+    <div class="why-us__container">
+      <div class="why-us__header fade-up">
+        <h2 class="why-us__title">¿Por Qué Grupo Holística?</h2>
+        <p class="why-us__subtitle">Combinamos experiencia, metodología y resultados para proteger lo más valioso de tu empresa: su reputación.</p>
+      </div>
+
+      <div class="why-us__content">
+        <div class="why-us__features">
+          <div class="feature fade-up">
+            <div class="feature__icon">
+              <i data-lucide="trophy"></i>
+            </div>
+            <div class="feature__content">
+              <h3 class="feature__title">Experiencia</h3>
+              <p class="feature__description">Más de 15 años liderando el sector de reputación corporativa en Colombia</p>
+            </div>
+          </div>
+
+          <div class="feature fade-up">
+            <div class="feature__icon">
+              <i data-lucide="lightbulb"></i>
+            </div>
+            <div class="feature__content">
+              <h3 class="feature__title">Metodología Propia</h3>
+              <p class="feature__description">Frameworks exclusivos desarrollados y probados en más de 500 empresas</p>
+            </div>
+          </div>
+
+          <div class="feature fade-up">
+            <div class="feature__icon">
+              <i data-lucide="users"></i>
+            </div>
+            <div class="feature__content">
+              <h3 class="feature__title">Equipo Experto</h3>
+              <p class="feature__description">Consultores senior con experiencia en múltiples industrias</p>
+            </div>
+          </div>
+
+          <div class="feature fade-up">
+            <div class="feature__icon">
+              <i data-lucide="bar-chart-2"></i>
+            </div>
+            <div class="feature__content">
+              <h3 class="feature__title">Resultados Medibles</h3>
+              <p class="feature__description">KPIs claros y reportes de impacto para cada proyecto</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-us__stat-card fade-up">
+          <span class="stat-card__number" data-count="96">0</span>
+          <span class="stat-card__percent">%</span>
+          <p class="stat-card__label">Tasa de Retención de Clientes</p>
+          <p class="stat-card__sublabel">Nuestros clientes confían en nosotros año tras año</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials" id="testimonios">
+    <div class="testimonials__container">
+      <div class="testimonials__header fade-up">
+        <h2 class="testimonials__title">Lo Que Dicen Nuestros Clientes</h2>
+        <p class="testimonials__subtitle">Historias de éxito que respaldan nuestra trayectoria</p>
+      </div>
+
+      <div class="testimonials__grid">
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-card__quote">
+            <i data-lucide="quote"></i>
+          </div>
+          <p class="testimonial-card__text">"Grupo Holística transformó nuestra estrategia de comunicación. Su enfoque integral nos permitió superar una crisis reputacional y salir fortalecidos."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">
+              <span>CM</span>
+            </div>
+            <div class="testimonial-card__info">
+              <h4 class="testimonial-card__name">Carlos Mendoza</h4>
+              <p class="testimonial-card__role">Director de Comunicaciones, Empresa del Sector Energético</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-card__quote">
+            <i data-lucide="quote"></i>
+          </div>
+          <p class="testimonial-card__text">"La metodología SIGERCO nos preparó para gestionar riesgos que ni siquiera habíamos contemplado. Inversión que vale cada peso."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">
+              <span>AR</span>
+            </div>
+            <div class="testimonial-card__info">
+              <h4 class="testimonial-card__name">Ana Rodríguez</h4>
+              <p class="testimonial-card__role">Gerente General, Multinacional de Consumo</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card fade-up">
+          <div class="testimonial-card__quote">
+            <i data-lucide="quote"></i>
+          </div>
+          <p class="testimonial-card__text">"Profesionales excepcionales. Su acompañamiento en gestión de entorno fue clave para el éxito de nuestros proyectos de infraestructura."</p>
+          <div class="testimonial-card__author">
+            <div class="testimonial-card__avatar">
+              <span>JL</span>
+            </div>
+            <div class="testimonial-card__info">
+              <h4 class="testimonial-card__name">Jorge López</h4>
+              <p class="testimonial-card__role">VP de Asuntos Corporativos, Constructora Nacional</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonials__dots">
+        <button class="testimonials__dot testimonials__dot--active" aria-label="Testimonio 1"></button>
+        <button class="testimonials__dot" aria-label="Testimonio 2"></button>
+        <button class="testimonials__dot" aria-label="Testimonio 3"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section -->
+  <section class="final-cta" id="contacto">
+    <div class="final-cta__container">
+      <div class="final-cta__content fade-up">
+        <h2 class="final-cta__title">¿Listo para Proteger tu Reputación?</h2>
+        <p class="final-cta__subtitle">Agenda una consulta gratuita con nuestros expertos y descubre cómo podemos ayudarte.</p>
+
+        <div class="final-cta__buttons">
+          <a href="mailto:info@grupoholistica.com" class="btn btn--primary">
+            <i data-lucide="mail"></i>
+            Escríbenos
+          </a>
+          <a href="https://wa.me/573138871628" class="btn btn--whatsapp" target="_blank" rel="noopener">
+            <i data-lucide="message-circle"></i>
+            WhatsApp
+          </a>
+        </div>
+
+        <div class="final-cta__location">
+          <i data-lucide="map-pin"></i>
+          <span>Calle 99 # 49-38 – Oficina 1205, Bogotá</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__main">
+        <div class="footer__brand">
+          <a href="#inicio" class="footer__logo">
+            <img src="assets/images/Mask-Group-3.png" alt="Grupo Holística" class="footer__logo-img">
+          </a>
+          <p class="footer__tagline">Pioneros en Reputación Corporativa en Colombia. Protegemos y potenciamos lo más valioso de tu empresa.</p>
+          <div class="footer__social">
+            <a href="https://www.facebook.com/GrupoHolisticaSAS" class="footer__social-link" aria-label="Facebook" target="_blank" rel="noopener">
+              <i data-lucide="facebook"></i>
+            </a>
+            <a href="https://twitter.com/Grupo_Holistica" class="footer__social-link" aria-label="Twitter" target="_blank" rel="noopener">
+              <i data-lucide="twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/grupo-hol%C3%ADstica" class="footer__social-link" aria-label="LinkedIn" target="_blank" rel="noopener">
+              <i data-lucide="linkedin"></i>
+            </a>
+            <a href="https://www.youtube.com/channel/UCCvGROwVpOtQbrcsBgLNVpA" class="footer__social-link" aria-label="YouTube" target="_blank" rel="noopener">
+              <i data-lucide="youtube"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__links">
+          <div class="footer__column">
+            <h4 class="footer__column-title">Servicios</h4>
+            <ul class="footer__list">
+              <li><a href="#servicios">RECO</a></li>
+              <li><a href="#servicios">SIGERCO</a></li>
+              <li><a href="#servicios">CELFORC</a></li>
+              <li><a href="#servicios">CES</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__column">
+            <h4 class="footer__column-title">Empresa</h4>
+            <ul class="footer__list">
+              <li><a href="#nosotros">Nosotros</a></li>
+              <li><a href="#testimonios">Casos de Éxito</a></li>
+              <li><a href="#contacto">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="footer__column">
+            <h4 class="footer__column-title">Contacto</h4>
+            <ul class="footer__list">
+              <li><a href="mailto:info@grupoholistica.com">info@grupoholistica.com</a></li>
+              <li><a href="tel:+573138871628">+57 313 8871628</a></li>
+              <li><a href="tel:+573143211799">+57 314 3211799</a></li>
+              <li><a href="tel:+5716495944">(57) (1) 6495944</a></li>
+              <li>Calle 99 # 49-38 – Oficina 1205</li>
+              <li>Edificio Centum Business Building</li>
+              <li>Bogotá, Colombia</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">&copy; 2024 Grupo Holística. Todos los derechos reservados.</p>
+        <div class="footer__legal">
+          <a href="#">Política de Privacidad</a>
+          <a href="#">Términos de Uso</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
