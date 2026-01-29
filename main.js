@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initTestimonialDots();
   initHorizontalScrollIndicators();
   initHeroSlider();
+  initInsights();
+  initContactForm();
+  initMobileScrollDots();
 });
 
 
@@ -526,3 +529,309 @@ function initHeroSlider() {
   // Start auto-play
   startAutoPlay();
 }
+
+/**
+ * Insights Section - Tab Filtering
+ */
+function initInsights() {
+  const tabs = document.querySelectorAll('.insights__tab');
+  const cards = document.querySelectorAll('.insight-card');
+  const grid = document.querySelector('.insights__grid');
+
+  if (!tabs.length || !cards.length) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('insights__tab--active'));
+      tab.classList.add('insights__tab--active');
+
+      // Filter cards
+      const filter = tab.dataset.filter;
+
+      cards.forEach(card => {
+        const cardType = card.dataset.type;
+
+        if (filter === 'all' || cardType === filter) {
+          card.style.display = '';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+
+          // Animate in
+          requestAnimationFrame(() => {
+            card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          });
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Reset scroll position on mobile
+      if (grid && window.innerWidth <= 768) {
+        grid.scrollTo({ left: 0, behavior: 'smooth' });
+      }
+
+      // Update scroll dots
+      updateInsightsDots();
+    });
+  });
+}
+
+/**
+ * Update Insights scroll dots based on visible cards
+ */
+function updateInsightsDots() {
+  const dots = document.querySelectorAll('.insights__scroll-dots .scroll-dots__dot');
+  const visibleCards = document.querySelectorAll('.insight-card[style=""], .insight-card:not([style])');
+
+  dots.forEach((dot, index) => {
+    if (index < visibleCards.length) {
+      dot.style.display = '';
+    } else {
+      dot.style.display = 'none';
+    }
+  });
+
+  // Reset active state
+  dots.forEach(d => d.classList.remove('scroll-dots__dot--active'));
+  if (dots[0]) dots[0].classList.add('scroll-dots__dot--active');
+}
+
+/**
+ * Contact Form - Validation and Submission
+ */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  const successMessage = document.getElementById('contactSuccess');
+
+  if (!form) return;
+
+  // Real-time validation
+  const inputs = form.querySelectorAll('input[required], textarea[required]');
+
+  inputs.forEach(input => {
+    input.addEventListener('blur', () => validateField(input));
+    input.addEventListener('input', () => {
+      if (input.parentElement.classList.contains('form-group--error')) {
+        validateField(input);
+      }
+    });
+  });
+
+  // Form submission
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Validate all fields
+    let isValid = true;
+    inputs.forEach(input => {
+      if (!validateField(input)) {
+        isValid = false;
+      }
+    });
+
+    // Check privacy checkbox
+    const privacyCheckbox = form.querySelector('#contact-privacy');
+    if (!privacyCheckbox.checked) {
+      isValid = false;
+      privacyCheckbox.focus();
+    }
+
+    if (!isValid) return;
+
+    // Show loading state
+    const submitBtn = form.querySelector('.contact-form__submit');
+    submitBtn.classList.add('contact-form__submit--loading');
+    submitBtn.disabled = true;
+
+    try {
+      // Collect form data
+      const formData = new FormData(form);
+
+      // Send to Formspree (or handle locally for demo)
+      const action = form.getAttribute('action');
+
+      if (action && !action.includes('YOUR_FORM_ID')) {
+        // Real submission
+        const response = await fetch(action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Form submission failed');
+        }
+      } else {
+        // Demo mode - simulate submission
+        await new Promise(resolve => setTimeout(resolve, 1500));
+      }
+
+      // Show success message
+      form.classList.add('hidden');
+      successMessage.classList.add('show');
+
+      // Reinitialize icons in success message
+      lucide.createIcons();
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
+    } finally {
+      submitBtn.classList.remove('contact-form__submit--loading');
+      submitBtn.disabled = false;
+    }
+  });
+}
+
+/**
+ * Validate a single form field
+ */
+function validateField(input) {
+  const formGroup = input.parentElement;
+  let isValid = true;
+
+  // Check required
+  if (input.hasAttribute('required') && !input.value.trim()) {
+    isValid = false;
+  }
+
+  // Check email format
+  if (input.type === 'email' && input.value.trim()) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(input.value.trim())) {
+      isValid = false;
+    }
+  }
+
+  // Update UI
+  if (isValid) {
+    formGroup.classList.remove('form-group--error');
+  } else {
+    formGroup.classList.add('form-group--error');
+  }
+
+  return isValid;
+}
+
+/**
+ * Mobile Scroll Dots - Services and Insights
+ * Creates dots for scroll containers. CSS handles visibility based on viewport.
+ */
+function initMobileScrollDots() {
+  // Services scroll dots
+  initScrollDotsForContainer('.services__grid', '.services');
+
+  // Insights scroll dots
+  initScrollDotsForContainer('.insights__grid', '.insights__scroll-dots');
+}
+
+/**
+ * Handle resize events to ensure dots work when switching viewports
+ */
+let resizeTimeout;
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+  resizeTimeout = setTimeout(() => {
+    // Re-initialize dots if they don't exist yet (e.g., loaded on desktop, resized to mobile)
+    const servicesDotsExist = document.querySelector('.services .scroll-dots');
+    if (!servicesDotsExist) {
+      initScrollDotsForContainer('.services__grid', '.services');
+    }
+  }, 250);
+});
+
+/**
+ * Initialize scroll dots for a container
+ */
+function initScrollDotsForContainer(containerSelector, dotsContainerSelector) {
+  const container = document.querySelector(containerSelector);
+  const dotsContainer = document.querySelector(dotsContainerSelector);
+
+  if (!container) return;
+
+  // Create dots if they don't exist (for services)
+  let dots = dotsContainer?.querySelectorAll('.scroll-dots__dot');
+
+  if (containerSelector === '.services__grid') {
+    const cards = container.querySelectorAll('.service-card');
+    const existingDots = document.querySelector('.services .scroll-dots');
+
+    if (!existingDots && cards.length > 0) {
+      const dotsWrapper = document.createElement('div');
+      dotsWrapper.className = 'scroll-dots services__scroll-dots';
+
+      cards.forEach((_, index) => {
+        const dot = document.createElement('button');
+        dot.className = `scroll-dots__dot${index === 0 ? ' scroll-dots__dot--active' : ''}`;
+        dot.setAttribute('aria-label', `Servicio ${index + 1}`);
+        dotsWrapper.appendChild(dot);
+      });
+
+      container.parentElement.appendChild(dotsWrapper);
+      dots = dotsWrapper.querySelectorAll('.scroll-dots__dot');
+    }
+  }
+
+  if (!dots || !dots.length) return;
+
+  const cards = container.children;
+
+  // Click on dots to scroll
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      const card = cards[index];
+      if (card) {
+        const scrollPosition = card.offsetLeft - 20;
+        container.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Update dots on scroll
+  let scrollTimeout;
+  container.addEventListener('scroll', () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.offsetWidth;
+
+      Array.from(cards).forEach((card, index) => {
+        const cardLeft = card.offsetLeft - 20;
+        const cardWidth = card.offsetWidth;
+        const cardCenter = cardLeft + (cardWidth / 2);
+        const viewCenter = scrollLeft + (containerWidth / 2);
+
+        if (Math.abs(cardCenter - viewCenter) < cardWidth / 2) {
+          dots.forEach(d => d.classList.remove('scroll-dots__dot--active'));
+          dots[index]?.classList.add('scroll-dots__dot--active');
+        }
+      });
+    }, 50);
+  }, { passive: true });
+}
+
+/**
+ * Hide hero swipe indicator after first interaction
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  const slider = document.getElementById('heroSlider');
+  const swipeHint = document.querySelector('.hero-slider__swipe-hint');
+
+  if (slider && swipeHint) {
+    // Hide after touch or after 8 seconds
+    const hideHint = () => {
+      swipeHint.style.opacity = '0';
+      setTimeout(() => {
+        swipeHint.style.display = 'none';
+      }, 300);
+    };
+
+    slider.addEventListener('touchstart', hideHint, { once: true });
+    setTimeout(hideHint, 8000);
+  }
+});

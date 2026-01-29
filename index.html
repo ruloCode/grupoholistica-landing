@@ -7,6 +7,14 @@
   <meta name="keywords" content="reputación corporativa, comunicación estratégica, gestión de crisis, Colombia">
   <title>Grupo Holística - Pioneros en Reputación Corporativa en Colombia</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#1a365d">
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,12 +33,13 @@
     <nav class="navbar" id="navbar">
       <div class="nav-container">
         <a href="#inicio" class="nav-logo">
-          <img src="assets/images/Logo-Grupo-Holistica.png" alt="Grupo Holística" width="150" height="44">
+          <img src="assets/images/holistica_logo.png" alt="Grupo Holística" width="150" height="44">
         </a>
         <div class="nav-menu" id="nav-menu">
           <a href="#servicios" class="nav-link">Servicios</a>
           <a href="#nosotros" class="nav-link">Nosotros</a>
           <a href="#testimonios" class="nav-link">Casos de Éxito</a>
+          <a href="#insights" class="nav-link">Insights</a>
           <a href="#contacto" class="nav-cta">Agendar consulta</a>
         </div>
         <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
@@ -113,6 +122,14 @@
           <path d="M9 18l6-6-6-6"/>
         </svg>
       </button>
+
+      <!-- Mobile Swipe Indicator -->
+      <div class="hero-slider__swipe-hint" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M5 12l4-4M5 12l4 4M19 12l-4-4M19 12l-4 4"/>
+        </svg>
+        <span>Desliza</span>
+      </div>
 
     </div>
 
@@ -332,28 +349,321 @@
     </div>
   </section>
 
-  <!-- Final CTA Section -->
-  <section class="final-cta" id="contacto">
-    <div class="final-cta__container">
-      <div class="final-cta__content fade-up">
-        <h2 class="final-cta__title">¿Listo para Proteger tu Reputación?</h2>
-        <p class="final-cta__subtitle">Agenda una consulta gratuita con nuestros expertos y descubre cómo podemos ayudarte.</p>
+  <!-- Insights Section (Blog/Podcasts) -->
+  <section class="insights" id="insights">
+    <div class="insights__container">
+      <div class="insights__header fade-up">
+        <h2 class="insights__title">Insights y Recursos</h2>
+        <p class="insights__subtitle">Artículos, podcasts y contenido exclusivo sobre reputación corporativa y comunicación estratégica</p>
+      </div>
 
-        <div class="final-cta__buttons">
-          <a href="mailto:info@grupoholistica.com" class="btn btn--primary">
-            <i data-lucide="mail"></i>
-            Escríbenos
-          </a>
-          <a href="https://wa.me/573138871628" class="btn btn--whatsapp" target="_blank" rel="noopener">
-            <i data-lucide="message-circle"></i>
-            WhatsApp
-          </a>
+      <div class="insights__tabs">
+        <button class="insights__tab insights__tab--active" data-filter="all">Todos</button>
+        <button class="insights__tab" data-filter="article">Artículos</button>
+        <button class="insights__tab" data-filter="podcast">Podcast</button>
+      </div>
+
+      <div class="insights__grid">
+        <!-- Featured Article -->
+        <article class="insight-card insight-card--featured fade-up" data-type="article">
+          <div class="insight-card__image">
+            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop" alt="Crisis de reputación">
+            <span class="insight-card__badge">Destacado</span>
+          </div>
+          <div class="insight-card__content">
+            <span class="insight-card__category">Gestión de Crisis</span>
+            <h3 class="insight-card__title">Cómo preparar tu empresa para una crisis reputacional en 2024</h3>
+            <p class="insight-card__excerpt">Las crisis no avisan. Descubre las estrategias que las empresas líderes en Colombia están implementando para blindar su reputación ante situaciones adversas.</p>
+            <div class="insight-card__meta">
+              <span class="insight-card__meta-item">
+                <i data-lucide="calendar"></i>
+                15 Ene 2024
+              </span>
+              <span class="insight-card__meta-item">
+                <i data-lucide="clock"></i>
+                8 min lectura
+              </span>
+            </div>
+            <a href="#" class="insight-card__link">
+              Leer artículo
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Podcast Card -->
+        <article class="insight-card insight-card--podcast fade-up" data-type="podcast">
+          <div class="insight-card__image">
+            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600&h=400&fit=crop" alt="Podcast Holística">
+            <span class="insight-card__badge insight-card__badge--podcast">Podcast</span>
+            <button class="insight-card__play" aria-label="Reproducir podcast">
+              <i data-lucide="play"></i>
+            </button>
+            <span class="insight-card__duration">32:15</span>
+          </div>
+          <div class="insight-card__content">
+            <span class="insight-card__category">Podcast EP. 24</span>
+            <h3 class="insight-card__title">El poder de la comunicación en tiempos de incertidumbre</h3>
+            <p class="insight-card__excerpt">Conversamos con líderes empresariales sobre cómo mantener la confianza de stakeholders durante momentos difíciles.</p>
+            <a href="#" class="insight-card__link">
+              Escuchar ahora
+              <i data-lucide="headphones"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Article Card 2 -->
+        <article class="insight-card fade-up" data-type="article">
+          <div class="insight-card__image">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Stakeholders">
+          </div>
+          <div class="insight-card__content">
+            <span class="insight-card__category">Stakeholders</span>
+            <h3 class="insight-card__title">5 claves para gestionar la relación con grupos de interés</h3>
+            <p class="insight-card__excerpt">Estrategias probadas para construir relaciones sólidas y duraderas con tus stakeholders clave.</p>
+            <a href="#" class="insight-card__link">
+              Leer artículo
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Article Card 3 -->
+        <article class="insight-card fade-up" data-type="article">
+          <div class="insight-card__image">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&h=400&fit=crop" alt="Sostenibilidad">
+          </div>
+          <div class="insight-card__content">
+            <span class="insight-card__category">Sostenibilidad</span>
+            <h3 class="insight-card__title">Comunicación ESG: más allá del greenwashing</h3>
+            <p class="insight-card__excerpt">Cómo comunicar genuinamente los compromisos de sostenibilidad de tu organización.</p>
+            <a href="#" class="insight-card__link">
+              Leer artículo
+              <i data-lucide="arrow-right"></i>
+            </a>
+          </div>
+        </article>
+
+        <!-- Podcast Card 2 -->
+        <article class="insight-card insight-card--podcast fade-up" data-type="podcast">
+          <div class="insight-card__image">
+            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&h=400&fit=crop" alt="Podcast">
+            <span class="insight-card__badge insight-card__badge--podcast">Podcast</span>
+            <button class="insight-card__play" aria-label="Reproducir podcast">
+              <i data-lucide="play"></i>
+            </button>
+            <span class="insight-card__duration">45:08</span>
+          </div>
+          <div class="insight-card__content">
+            <span class="insight-card__category">Podcast EP. 23</span>
+            <h3 class="insight-card__title">Liderazgo reputacional: el CEO como vocero</h3>
+            <p class="insight-card__excerpt">Cómo los líderes empresariales pueden convertirse en el mejor activo de comunicación de su organización.</p>
+            <a href="#" class="insight-card__link">
+              Escuchar ahora
+              <i data-lucide="headphones"></i>
+            </a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Scroll Dots for Mobile -->
+      <div class="scroll-dots insights__scroll-dots">
+        <button class="scroll-dots__dot scroll-dots__dot--active" aria-label="Slide 1"></button>
+        <button class="scroll-dots__dot" aria-label="Slide 2"></button>
+        <button class="scroll-dots__dot" aria-label="Slide 3"></button>
+        <button class="scroll-dots__dot" aria-label="Slide 4"></button>
+        <button class="scroll-dots__dot" aria-label="Slide 5"></button>
+      </div>
+
+      <div class="insights__cta fade-up">
+        <a href="#" class="btn btn--outline">
+          Ver todos los recursos
+          <i data-lucide="arrow-right"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contacto">
+    <div class="contact__container">
+      <!-- Left: Info -->
+      <div class="contact__info fade-up">
+        <h2 class="contact__title">¿Listo para Proteger tu Reputación?</h2>
+        <p class="contact__subtitle">Agenda una consulta gratuita con nuestros expertos y descubre cómo podemos ayudarte.</p>
+
+        <div class="contact__features">
+          <div class="contact__feature">
+            <div class="contact__feature-icon">
+              <i data-lucide="clock"></i>
+            </div>
+            <div class="contact__feature-content">
+              <h4>Respuesta en 24 horas</h4>
+              <p>Nuestro equipo te contactará rápidamente</p>
+            </div>
+          </div>
+
+          <div class="contact__feature">
+            <div class="contact__feature-icon">
+              <i data-lucide="shield-check"></i>
+            </div>
+            <div class="contact__feature-content">
+              <h4>Consulta confidencial</h4>
+              <p>Tu información está protegida con nosotros</p>
+            </div>
+          </div>
+
+          <div class="contact__feature">
+            <div class="contact__feature-icon">
+              <i data-lucide="users"></i>
+            </div>
+            <div class="contact__feature-content">
+              <h4>Expertos dedicados</h4>
+              <p>Consultores senior con +15 años de experiencia</p>
+            </div>
+          </div>
         </div>
 
-        <div class="final-cta__location">
+        <div class="contact__direct">
+          <p class="contact__direct-title">Contacto directo</p>
+          <div class="contact__direct-links">
+            <a href="mailto:info@grupoholistica.com" class="contact__direct-link">
+              <i data-lucide="mail"></i>
+              info@grupoholistica.com
+            </a>
+            <a href="tel:+573138871628" class="contact__direct-link">
+              <i data-lucide="phone"></i>
+              +57 313 8871628
+            </a>
+            <a href="https://wa.me/573143211799" class="contact__direct-link" target="_blank" rel="noopener">
+              <i data-lucide="message-circle"></i>
+              WhatsApp: +57 314 3211799
+            </a>
+          </div>
+        </div>
+
+        <div class="contact__location">
           <i data-lucide="map-pin"></i>
-          <span>Calle 99 # 49-38 – Oficina 1205, Bogotá</span>
+          <span class="contact__location-text">
+            Calle 99 # 49-38 – Oficina 1205<br>
+            Edificio Centum Business Building<br>
+            Bogotá, Colombia
+          </span>
         </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="contact__form-wrapper fade-up">
+        <form class="contact-form__form" id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+          <h3 class="contact-form__title">Envíanos un mensaje</h3>
+          <p class="contact-form__subtitle">Completa el formulario y te contactaremos pronto</p>
+
+          <div class="contact-form__grid">
+            <div class="form-group">
+              <label for="contact-name">Nombre <span>*</span></label>
+              <input type="text" id="contact-name" name="name" placeholder="Tu nombre completo" required>
+              <span class="form-group__error">Por favor ingresa tu nombre</span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email <span>*</span></label>
+              <input type="email" id="contact-email" name="email" placeholder="tu@email.com" required>
+              <span class="form-group__error">Por favor ingresa un email válido</span>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-phone">Teléfono</label>
+              <input type="tel" id="contact-phone" name="phone" placeholder="+57 300 000 0000">
+            </div>
+
+            <div class="form-group">
+              <label for="contact-company">Empresa</label>
+              <input type="text" id="contact-company" name="company" placeholder="Nombre de tu empresa">
+            </div>
+
+            <div class="form-group form-group--full">
+              <label for="contact-service">Servicio de interés</label>
+              <select id="contact-service" name="service">
+                <option value="">Selecciona un servicio</option>
+                <option value="reco">RECO - Reputación Estratégica Corporativa</option>
+                <option value="sigerco">SIGERCO - Gestión de Riesgos y Crisis</option>
+                <option value="celforc">CELFORC - Formación en Reputación</option>
+                <option value="ces">CES - Comunicación Estratégica Sostenible</option>
+                <option value="entorno">ENTORNO - Gestión de Stakeholders</option>
+                <option value="copem">COPEM - Consultoría Petróleo y Minería</option>
+                <option value="siso">SISO - Innovación para Sinergia Social</option>
+                <option value="otro">Otro / No estoy seguro</option>
+              </select>
+            </div>
+
+            <div class="form-group form-group--full">
+              <label for="contact-message">Mensaje <span>*</span></label>
+              <textarea id="contact-message" name="message" placeholder="Cuéntanos sobre tu proyecto o consulta..." required></textarea>
+              <span class="form-group__error">Por favor ingresa tu mensaje</span>
+            </div>
+          </div>
+
+          <div class="form-checkbox">
+            <input type="checkbox" id="contact-privacy" name="privacy" required>
+            <label for="contact-privacy">
+              Acepto la <a href="#">Política de Privacidad</a> y autorizo el tratamiento de mis datos personales.
+            </label>
+          </div>
+
+          <button type="submit" class="contact-form__submit">
+            <span class="btn-text">Enviar mensaje</span>
+            <span class="btn-spinner"></span>
+            <i data-lucide="send"></i>
+          </button>
+        </form>
+
+        <!-- Success Message -->
+        <div class="contact-form__success" id="contactSuccess">
+          <div class="contact-form__success-icon">
+            <i data-lucide="check"></i>
+          </div>
+          <h3>¡Mensaje enviado!</h3>
+          <p>Gracias por contactarnos. Nuestro equipo te responderá en las próximas 24 horas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section" id="ubicacion">
+    <div class="map-section__container">
+      <div class="map-section__overlay">
+        <div class="map-section__card fade-up">
+          <span class="map-section__label">Encuéntranos</span>
+          <div class="map-section__icon">
+            <i data-lucide="map-pin"></i>
+          </div>
+          <h3 class="map-section__title">Nuestra Ubicación</h3>
+          <p class="map-section__address">
+            Calle 99 # 49-38 – Oficina 1205<br>
+            Edificio Centum Business Building<br>
+            Bogotá, Colombia
+          </p>
+          <a href="https://maps.app.goo.gl/hH5kZh86mi8PrncC6"
+             class="map-section__link"
+             target="_blank"
+             rel="noopener">
+            <i data-lucide="navigation"></i>
+            <span>Cómo llegar</span>
+          </a>
+        </div>
+      </div>
+      <div class="map-section__iframe-wrapper">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7952.948122519046!2d-74.061475!3d4.687372!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9aea85e4e29f%3A0x635c842d30b22652!2sGrupo%20Hol%C3%ADstica!5e0!3m2!1ses!2sco!4v1769692939803!5m2!1ses!2sco"
+          width="100%"
+          height="500"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación de Grupo Holística">
+        </iframe>
       </div>
     </div>
   </section>
@@ -399,6 +709,7 @@
             <ul class="footer__list">
               <li><a href="#nosotros">Nosotros</a></li>
               <li><a href="#testimonios">Casos de Éxito</a></li>
+              <li><a href="#insights">Blog & Podcast</a></li>
               <li><a href="#contacto">Contacto</a></li>
             </ul>
           </div>
