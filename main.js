@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initInsights();
   initContactForm();
   initMobileScrollDots();
+  initWhatsAppVisibility();
 });
 
 
@@ -835,3 +836,50 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(hideHint, 8000);
   }
 });
+
+/**
+ * WhatsApp button visibility on mobile
+ * Hide in hero, show when scrolling to services section
+ */
+function initWhatsAppVisibility() {
+  const whatsappBtn = document.querySelector('.whatsapp-btn');
+  const serviciosSection = document.getElementById('servicios');
+
+  if (!whatsappBtn || !serviciosSection) return;
+
+  // Always visible on desktop
+  if (window.innerWidth > 768) {
+    whatsappBtn.classList.add('visible');
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    // Only apply on mobile
+    if (window.innerWidth <= 768) {
+      const entry = entries[0];
+      // Show button when services section is in view or has been scrolled past
+      if (entry.isIntersecting || entry.boundingClientRect.top < 0) {
+        whatsappBtn.classList.add('visible');
+      } else {
+        whatsappBtn.classList.remove('visible');
+      }
+    }
+  }, { threshold: 0 });
+
+  observer.observe(serviciosSection);
+
+  // Handle resize events
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      whatsappBtn.classList.add('visible');
+    } else {
+      // Re-check visibility based on scroll position
+      const rect = serviciosSection.getBoundingClientRect();
+      if (rect.top < window.innerHeight || rect.top < 0) {
+        whatsappBtn.classList.add('visible');
+      } else {
+        whatsappBtn.classList.remove('visible');
+      }
+    }
+  });
+}
